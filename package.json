@@ -1,0 +1,16 @@
+{
+  "name": "empleocr-pani-monitor",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Monitor gratuito del PANI con GitHub Actions y Playwright.",
+  "type": "module",
+  "scripts": {
+    "scrape": "node src/scrape-pani.mjs"
+  },
+  "dependencies": {
+    "playwright": "1.61.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
