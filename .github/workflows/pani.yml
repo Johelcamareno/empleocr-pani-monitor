@@ -1,0 +1,65 @@
+name: Revisar vacantes del PANI
+
+on:
+  workflow_dispatch:
+  schedule:
+    # GitHub usa UTC. Se ejecuta cada seis horas, en el minuto 17.
+    - cron: "17 */6 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pani-monitor
+  cancel-in-progress: false
+
+jobs:
+  revisar-pani:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Preparar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Instalar dependencias
+        run: npm install --no-audit --no-fund
+
+      - name: Instalar Chromium
+        run: npx playwright install chromium --with-deps
+
+      - name: Abrir el PANI y generar JSON
+        id: scraper
+        continue-on-error: true
+        run: npm run scrape
+
+      - name: Guardar diagnóstico
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: diagnostico-pani-${{ github.run_number }}
+          path: artifacts/
+          if-no-files-found: ignore
+          retention-days: 7
+
+      - name: Publicar el resultado en el repositorio
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/pani.json
+          if git diff --cached --quiet; then
+            echo "No hay cambios para publicar."
+          else
+            git commit -m "Actualizar monitor del PANI"
+            git push
+          fi
+
+      - name: Marcar la ejecución como fallida si Playwright no pudo entrar
+        if: steps.scraper.outcome == 'failure'
+        run: exit 1
