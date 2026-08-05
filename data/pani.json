@@ -1,12 +1,13 @@
 {
   "version": 1,
   "ok": false,
-  "status": "PENDING_FIRST_RUN",
+  "status": "ERROR",
   "source": "PANI",
   "sourceUrl": "https://pani.go.cr/tramites-y-servicios/reclutamiento-recursos-humanos/",
-  "fetchedAt": null,
+  "fetchedAt": "2026-08-05T03:18:33.947Z",
   "lastSuccessAt": null,
-  "error": "El flujo de GitHub Actions todavía no se ha ejecutado.",
+  "error": "Playwright abrió una página, pero no reconoció el contenido de reclutamiento.",
+  "previousContentHash": null,
   "runner": {
     "service": "GitHub Actions",
     "browser": "Playwright Chromium"
