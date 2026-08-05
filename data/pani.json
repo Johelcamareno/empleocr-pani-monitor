@@ -4,7 +4,7 @@
   "status": "ERROR",
   "source": "PANI",
   "sourceUrl": "https://pani.go.cr/tramites-y-servicios/reclutamiento-recursos-humanos/",
-  "fetchedAt": "2026-08-05T03:18:33.947Z",
+  "fetchedAt": "2026-08-05T08:52:50.922Z",
   "lastSuccessAt": null,
   "error": "Playwright abrió una página, pero no reconoció el contenido de reclutamiento.",
   "previousContentHash": null,
