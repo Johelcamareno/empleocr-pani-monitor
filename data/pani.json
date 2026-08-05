@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "ok": false,
+  "status": "PENDING_FIRST_RUN",
+  "source": "PANI",
+  "sourceUrl": "https://pani.go.cr/tramites-y-servicios/reclutamiento-recursos-humanos/",
+  "fetchedAt": null,
+  "lastSuccessAt": null,
+  "error": "El flujo de GitHub Actions todavía no se ha ejecutado.",
+  "runner": {
+    "service": "GitHub Actions",
+    "browser": "Playwright Chromium"
+  }
+}
